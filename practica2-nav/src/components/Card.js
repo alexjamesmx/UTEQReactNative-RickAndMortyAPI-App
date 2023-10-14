@@ -3,11 +3,23 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native"
 import { globalStyles } from "../styles"
 import Fonts from "../constants/Fonts"
 import Favoritos from "./Favoritos/Favoritos"
+import { useNavigation } from "@react-navigation/native"
+
 export default function Card(props) {
   const { characters } = props
+  const navigation = useNavigation()
 
   const goToPersonaje = () => {
-    console.log(`Conoce a ${characters.name}`)
+    navigation.navigate("Detail", {
+      id: characters.id,
+      name: characters.name,
+      status: characters.status,
+      species: characters.species,
+      type: characters.type,
+      image: characters.image,
+      gender: characters.gender,
+      origin: characters.origin.name,
+    })
   }
 
   return (

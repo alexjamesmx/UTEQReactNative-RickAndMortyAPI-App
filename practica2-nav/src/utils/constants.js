@@ -1,5 +1,5 @@
 export const ENV = {
-  API_URL: "http://192.168.0.186:1337/api",
+  API_URL: "http://10.13.9.223:1337/api",
   API_URL_RM: `http://rickandmortyapi.com/api/character`,
   ENDPOINTS: {
     REGISTER: "/auth/local/register",
