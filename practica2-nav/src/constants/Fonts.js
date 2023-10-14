@@ -9,4 +9,9 @@ export default {
     medium: 18,
     small: 12,
   },
+  weigth: {
+    light: "300",
+    regular: "400",
+    bold: "700",
+  },
 }

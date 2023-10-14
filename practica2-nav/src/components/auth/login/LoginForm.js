@@ -7,6 +7,7 @@ import * as Yup from "yup"
 import { authApi } from "../../../api/auth"
 import { useAuth } from "../../../hooks/useAuth.js"
 import Toast from "react-native-root-toast"
+
 export default function LoginForm(props) {
   const { setShowLogin } = props
   const { login } = useAuth()
@@ -23,15 +24,15 @@ export default function LoginForm(props) {
     }),
     validateOnChange: false,
     onSubmit: async (formData) => {
-      const { email: identifer, password } = formData
+      const { email: identifier, password } = formData
       try {
-        const response = await authApi.login(identifer, password)
+        const response = await authApi.login(identifier, password)
         console.log("Log in ok")
         console.log(response)
         login(response.jwt)
       } catch (error) {
-        console.log(error)
-        Toast.show("Usuario o contraseña incorrectas", {
+        console.log("error credenciales: ", error)
+        Toast.show("Incorrect username or password, Morty!", {
           position: Toast.positions.CENTER,
           duration: Toast.durations.LONG,
         })
@@ -40,18 +41,18 @@ export default function LoginForm(props) {
   })
 
   return (
-    <View>
+    <View style={{ marginHorizontal: 20 }}>
       <TextInput
-        label="Email"
-        style={globalStyles.form.input}
+        label="Correo dimensional"
+        style={styles.input}
         autoCapitalize="none"
         onChangeText={(text) => formik.setFieldValue("email", text)}
         value={formik.values.email}
         error={formik.errors.email}
       ></TextInput>
       <TextInput
-        label="Password"
-        style={globalStyles.form.input}
+        label="Contraseña top secret portal"
+        style={styles.input}
         secureTextEntry
         onChangeText={(text) => formik.setFieldValue("password", text)}
         value={formik.values.password}
@@ -59,19 +60,36 @@ export default function LoginForm(props) {
       ></TextInput>
       <Button
         mode="contained"
-        style={globalStyles.form.buttonSubmit}
+        style={styles.buttonSubmit}
         onPress={formik.handleSubmit}
         loading={formik.isSubmitting}
       >
-        Log in
+        Get Schwifty!
       </Button>
       <Button
         mode="text"
-        style={globalStyles.form.buttonText}
+        style={styles.buttonText}
         onPress={() => setShowLogin(false)}
       >
-        Register
+        Crear nuevo morty
       </Button>
     </View>
   )
+}
+
+const styles = {
+  input: {
+    ...globalStyles.form.input,
+    // backgroundColor: "transparent",
+    borderColor: "#00FF00", // Rick's portal green
+    color: "#FFFFFF", // White text
+  },
+  buttonSubmit: {
+    ...globalStyles.form.buttonSubmit,
+    backgroundColor: "#FF9800", // Rick's lab coat orange
+  },
+  buttonText: {
+    ...globalStyles.form.buttonText,
+    color: "#FF9800", // Rick's lab coat orange
+  },
 }

@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native"
 import React from "react"
-import Color from "../../constants/Colors"
+import Color from "../constants/Colors"
 
 export default function ButtonSocial(props) {
   const { title, imageType, color } = props
